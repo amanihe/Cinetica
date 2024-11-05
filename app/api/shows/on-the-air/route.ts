@@ -7,8 +7,8 @@ export async function GET() {
   const res = await fetch(`https://api.themoviedb.org/3/tv/on_the_air/?api_key=${process.env.TMDB_API_KEY}`);
   const data = await res.json();
 
-  const series: TVShow[] = data.results.map((show: any) => ({
-    adulte: show.adult,
+  const series: TVShow[] = data.results.map((show: TVShow) => ({
+    adult: show.adult,
     chemin_fond: show.backdrop_path,
     genres_ids: show.genre_ids,
     id: show.id,
