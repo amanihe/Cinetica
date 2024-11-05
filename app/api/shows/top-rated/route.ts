@@ -12,7 +12,7 @@ export async function GET() {
 
     const data = await res.json();
 
-    const shows: TVShow[] = data.results.map((show: any) => ({
+    const shows: TVShow[] = data.results.map((show: TVShow) => ({
         adultt: show.adult,
         backdrop_path: show.backdrop_path,
         genre_ids: show.genre_ids,
