@@ -1,3 +1,4 @@
+import { TVShow } from '@/app/entities/TVShow';
 import { NextResponse } from 'next/server';
 
 
