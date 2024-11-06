@@ -5,8 +5,11 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   const res = await fetch(`https://api.themoviedb.org/3/tv/on_the_air/?api_key=${process.env.TMDB_API_KEY}`);
-  const data = await res.json();
+  if (!res.ok) {
+    return NextResponse.json({ error: 'Failed to fetch data' }, { status: res.status });
+}
 
+const data = await res.json();
   const series: TVShow[] = data.results.map((show: TVShow) => ({
     adult: show.adult,
     chemin_fond: show.backdrop_path,
