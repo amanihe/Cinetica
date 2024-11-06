@@ -1,8 +1,8 @@
-// app/utils/mapData.ts
+
 import { Movie } from '@/app/entities/Movie';
 import { TVShow } from '@/app/entities/TVShow';
 
-export function mapToMovie(data: any): Movie {
+export function mapToMovie(data: Movie): Movie {
     return {
         adult: data.adult,
         backdrop_path: data.backdrop_path,
@@ -21,7 +21,7 @@ export function mapToMovie(data: any): Movie {
     };
 }
 
-export function mapToTVShow(data: any): TVShow {
+export function mapToTVShow(data: TVShow): TVShow {
     return {
         adult: data.adult,
         backdrop_path: data.backdrop_path,
