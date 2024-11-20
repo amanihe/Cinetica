@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const [isLogged, setIsLogged] = useState(false);
+  //const [isLogged, setIsLogged] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
 
@@ -14,7 +14,7 @@ export default function Home() {
     if (email === user.username) {
       const match = await bcrypt.compare(password, user.password);
       if (match) {
-        setIsLogged(true);
+        //setIsLogged(true);
         console.log("Connexion réussie !");
         setErrorMessage('');
         router.push("/auth");
