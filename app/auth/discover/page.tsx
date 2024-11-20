@@ -1,10 +1,12 @@
 
 "use client";
 
+import { Movie } from "@/app/entities/Movie";
+import { TVShow } from "@/app/entities/TVShow";
 import { useEffect, useState } from "react";
 
 export default function DiscoverPage() {
-  const [data, setData] = useState<{ movies: any[]; tvShows: any[] }>({
+  const [data, setData] = useState<{ movies: Movie[]; tvShows: TVShow[] }>({
     movies: [],
     tvShows: [],
   });
