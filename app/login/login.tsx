@@ -4,9 +4,10 @@ import logo from '@/app/public/images/login.png';
 
 interface LoginPageProps {
   onSubmit: (email: string, password: string) => void;
+  errorMessage: string;
 }
 
-const LoginPage: FC<LoginPageProps> = ({ onSubmit }) => {
+const LoginPage: FC<LoginPageProps> = ({ onSubmit, errorMessage }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -33,6 +34,12 @@ const LoginPage: FC<LoginPageProps> = ({ onSubmit }) => {
             If you want to watch a movie or TV show, you may login with your email address and password.
           </p>
           
+          {errorMessage && (
+            <div className="text-red-600 mb-4">
+              {errorMessage}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-gray-700">Email address</label>
