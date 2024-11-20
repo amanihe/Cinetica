@@ -1,6 +1,6 @@
 "use client"
 import { useState } from 'react';
-import LoginPage from './auth/components/login';
+import LoginPage from './login/login';
 import { user } from './repository/user';
 import bcrypt from 'bcryptjs';
 import { useRouter } from 'next/navigation';

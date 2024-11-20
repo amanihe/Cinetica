@@ -56,7 +56,7 @@ export function AppSidebar() {
           <div className="md:p-6"></div>
           <SidebarGroupLabel>Discover</SidebarGroupLabel>
           <SidebarMenuButton asChild>
-                    <a href="#">
+                    <a href="/auth/discover">
                     <Grid />
                       <span>Discover</span>
                     </a>
