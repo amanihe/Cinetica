@@ -25,7 +25,7 @@ const LoginPage: FC<LoginPageProps> = ({ errorMessage }) => {
       setError("Invalid email or password");
     } else {
       setError("");
-      window.location.href = "/auth";
+      window.location.href = "/dashboard";
     }
   };
   
