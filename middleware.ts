@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
   });
-  console.log("Token:", token); // Affiche le jeton s'il existe
+  console.log("Token:", token);
   console.log("Pathname:", request.nextUrl.pathname);
   const { pathname } = request.nextUrl;
   if (!token) {
@@ -18,12 +18,12 @@ export async function middleware(request: NextRequest) {
     return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
   }
 
-  if (pathname.startsWith("/auth") && !token) {
+  if (pathname.startsWith("/dashboard") && !token) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
   if (pathname === "/" && token) {
-    return NextResponse.redirect(new URL("/auth", request.url));
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   return NextResponse.next();
@@ -32,7 +32,7 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/",          
-    "/auth/:path*", 
+    "/dashboard/:path*", 
     "/api/discover",
     "/api/movies/:path*",
     "/api/shows/:path*",

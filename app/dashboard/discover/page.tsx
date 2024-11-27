@@ -1,30 +1,12 @@
 
 "use client";
-
-import { Movie } from "@/app/entities/Movie";
-import { TVShow } from "@/app/entities/TVShow";
-import { useEffect, useState } from "react";
-
+import { useDiscover } from "@/hooks/use-discover";
 export default function DiscoverPage() {
-  const [data, setData] = useState<{ movies: Movie[]; tvShows: TVShow[] }>({
-    movies: [],
-    tvShows: [],
-  });
+  const { data, loading, error } = useDiscover();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch("/api/discover");
-        if (!res.ok) throw new Error("Failed to fetch data");
-        const result = await res.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
-    fetchData();
-  }, []);
 
   return (
     <div className="p-6">

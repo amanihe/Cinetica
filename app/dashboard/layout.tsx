@@ -1,16 +1,15 @@
 "use client";
-import { AppSidebar } from "@/app/auth/components/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/app/dashboard/components/app-sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { Navbar } from "./components/app-navbar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Navbar />
       <SidebarProvider>
+        <Navbar /> {/* Navbar avec SidebarTrigger intégré */}
         <AppSidebar />
         <main className="flex-1 pt-14">
-          <SidebarTrigger />
           {children}
         </main>
       </SidebarProvider>

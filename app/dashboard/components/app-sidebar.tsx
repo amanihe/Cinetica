@@ -12,39 +12,38 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-// Menu items.
 const MoviesItems = [
 
   {
     title: "Now Playing",
-    url: "#",
+    url: "/dashboard/movies/now-playing",
     icon: Film,
   },
   {
     title: "Popular",
-    url: "#",
+    url: "/dashboard/movies/popular",
     icon: Smile,
   },
   {
     title: "Top Rated",
-    url: "#",
+    url: "/dashboard/movies/top-rated",
     icon: Star,
   }
 ]
 const TvShowItems = [
   {
     title: "On The Air",
-    url: "#",
+    url: "/dashboard/shows/on-the-air",
     icon: Tv,
   },
   {
     title: "Popular",
-    url: "#",
+    url: "/dashboard/shows/popular",
     icon: Smile,
   },
   {
     title: "Top Rated",
-    url: "#",
+    url: "/dashboard/shows/top-rated",
     icon: Star,
   }
 ]
@@ -56,7 +55,7 @@ export function AppSidebar() {
         <SidebarGroup>
           <div className="md:p-6"></div>
           <SidebarMenuButton asChild>
-                    <a href="/auth/discover">
+                    <a href="/dashboard/discover">
                     <Grid />
                       <span>Discover</span>
                     </a>

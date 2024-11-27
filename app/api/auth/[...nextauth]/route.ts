@@ -15,16 +15,16 @@ export const authOptions: AuthOptions = {
         const { username, password } = credentials || {};
       
         if (!username || !password) {
-          return null; // Retourne null si les champs sont vides
+          return null; 
         }
       
         const isMatch = await bcrypt.compare(password, user.password);
       
         if (username === user.username && isMatch) {
-          return { id: user.id.toString(), email: user.username }; // Succès
+          return { id: user.id.toString(), email: user.username }; 
         }
       
-        return null; // Retourne null si les identifiants sont incorrects
+        return null; 
       },
     }),
   ],
@@ -43,7 +43,7 @@ export const authOptions: AuthOptions = {
     },
   },
   pages: {
-    signIn: "/", // Redirection vers la page de connexion
+    signIn: "/",
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
