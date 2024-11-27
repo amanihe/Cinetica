@@ -1,4 +1,5 @@
-import { Grid, Tv, Film,Smile, Star } from "lucide-react"
+import { Grid, Tv, Film,Smile, Star,LogOut } from "lucide-react"
+import { signOut } from "next-auth/react";
 
 import {
   Sidebar,
@@ -90,8 +91,18 @@ export function AppSidebar() {
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
+          
         </SidebarGroup>
       </SidebarContent>
+      <div className="mt-auto p-4 border-t">
+        <button
+          className="flex items-center gap-2 text-black hover:text-red-800"
+          onClick={() => signOut({ callbackUrl: "/" })}
+        >
+          <LogOut />
+          <span>Logout</span>
+        </button>
+      </div>
     </Sidebar>
   )
 }

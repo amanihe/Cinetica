@@ -1,20 +1,34 @@
-import Image from 'next/image';
-import { FC, useState } from 'react';
-import logo from '@/app/public/images/login.png';
+import Image from "next/image";
+import { FC, useState } from "react";
+import logo from "@/app/public/images/login.png";
+import { signIn } from "next-auth/react";
 
 interface LoginPageProps {
-  onSubmit: (email: string, password: string) => void;
   errorMessage: string;
 }
 
-const LoginPage: FC<LoginPageProps> = ({ onSubmit, errorMessage }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LoginPage: FC<LoginPageProps> = ({ errorMessage }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(errorMessage);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(email, password);
+  
+    const result = await signIn("credentials", {
+      redirect: false,
+      username: email,
+      password,
+    });
+  
+    if (!result?.ok) {
+      setError("Invalid email or password");
+    } else {
+      setError("");
+      window.location.href = "/auth";
+    }
   };
+  
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
@@ -33,10 +47,10 @@ const LoginPage: FC<LoginPageProps> = ({ onSubmit, errorMessage }) => {
           <p className="text-gray-600 mb-8">
             If you want to watch a movie or TV show, you may login with your email address and password.
           </p>
-          
-          {errorMessage && (
+
+          {error && (
             <div className="text-red-600 mb-4">
-              {errorMessage}
+              {error}
             </div>
           )}
 
