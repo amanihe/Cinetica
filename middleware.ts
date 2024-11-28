@@ -19,10 +19,13 @@ export async function middleware(request: NextRequest) {
   }
 
   if (pathname.startsWith("/dashboard") && !token) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   if (pathname === "/" && token) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+  if (pathname === "/login" && token) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
@@ -31,7 +34,8 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/",          
+    "/",
+    "/login",          
     "/dashboard/:path*", 
     "/api/discover",
     "/api/movies/:path*",

@@ -1,6 +1,6 @@
 
 "use client";
-import { useDiscover } from "@/hooks/use-discover";
+import { useDiscover } from "@/app/dashboard/discover/use-cases/use-discover";
 export default function DiscoverPage() {
   const { data, loading, error } = useDiscover();
 

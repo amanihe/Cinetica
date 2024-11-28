@@ -1,6 +1,6 @@
 "use client";
 
-import { useOnTheAirShows } from "@/hooks/use-shows";
+import { useOnTheAirShows } from "@/app/dashboard/shows/use-cases/use-shows";
 
 
 export default function PopularShows() {

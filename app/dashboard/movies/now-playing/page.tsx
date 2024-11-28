@@ -1,6 +1,6 @@
 "use client";
 
-import { useNowPlayingMovies } from "@/hooks/use-movies";
+import { useNowPlayingMovies } from "@/app/dashboard/movies/use-cases/use-movies";
 
 
 export default function NowPlayingMovies() {

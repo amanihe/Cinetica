@@ -1,6 +1,6 @@
 "use client";
 
-import { useTopRatedMovies } from "@/hooks/use-movies";
+import { useTopRatedMovies } from "@/app/dashboard/movies/use-cases/use-movies";
 
 
 export default function TopRatedMovies() {

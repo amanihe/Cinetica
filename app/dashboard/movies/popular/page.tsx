@@ -1,6 +1,6 @@
 "use client";
 
-import { usePopularMovies } from "@/hooks/use-movies";
+import { usePopularMovies } from "@/app/dashboard/movies/use-cases/use-movies";
 
 
 export default function PopularMovies() {

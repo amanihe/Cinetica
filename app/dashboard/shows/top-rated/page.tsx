@@ -1,6 +1,6 @@
 "use client";
 
-import { useTopRatedShows } from "@/hooks/use-shows";
+import { useTopRatedShows } from "@/app/dashboard/shows/use-cases/use-shows";
 
 export default function PopularShows() {
   const { data, loading, error } = useTopRatedShows();

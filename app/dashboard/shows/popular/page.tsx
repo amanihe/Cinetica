@@ -1,6 +1,6 @@
 "use client";
 
-import { usePopularShows } from "@/hooks/use-shows";
+import { usePopularShows } from "@/app/dashboard/shows/use-cases/use-shows";
 
 export default function PopularShows() {
   const { data, loading, error } = usePopularShows();

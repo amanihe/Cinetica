@@ -1,6 +1,6 @@
 "use client";
-import LoginPage from "./login/login";
+import { redirect } from "next/navigation";
 
 export default function Login() {
-  return <LoginPage errorMessage="" />;
+  redirect("/dashboard");
 }
