@@ -1,13 +1,12 @@
 "use client";
 
-import { useTopRatedMovies } from "@/app/dashboard/movies/use-cases/use-movies";
-
+import { useFetchTopRatedMovies } from "../use-cases/useFetchMovies";
 
 export default function TopRatedMovies() {
-  const { data, loading, error } = useTopRatedMovies();
+  const { data = [], isLoading, isError } = useFetchTopRatedMovies();
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+ if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error fetching movies</div>;
 
   return (
     <div className="p-6">

@@ -1,13 +1,13 @@
 "use client";
 
-import { usePopularShows } from "@/app/dashboard/shows/use-cases/use-shows";
+import { useFetchPopularShows } from "@/app/dashboard/shows/use-cases/useFetchShows";
 
 export default function PopularShows() {
-  const { data, loading, error } = usePopularShows();
+  const { data = [], isLoading, isError } = useFetchPopularShows();
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-
+  if (isLoading) return <div>Loading...</div>;
+   if (isError) return <div>Error fetching movies</div>;
+ 
   return (
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">Popular TV Shows</h2>

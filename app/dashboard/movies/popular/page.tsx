@@ -1,13 +1,14 @@
 "use client";
 
-import { usePopularMovies } from "@/app/dashboard/movies/use-cases/use-movies";
+import { useFetchPopularMovies } from "../use-cases/useFetchMovies";
+
 
 
 export default function PopularMovies() {
-  const { data, loading, error } = usePopularMovies();
+  const { data = [], isLoading, isError } = useFetchPopularMovies();
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error fetching movies</div>;
 
   return (
     <div className="p-6">
