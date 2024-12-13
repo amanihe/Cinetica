@@ -13,8 +13,8 @@ export default function RootLayout({
   const [queryClient] = useState(() => new QueryClient());
 
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="h-full overflow-hidden">
+      <body lang="en" className="h-full overflow-hidden">
         <QueryClientProvider client={queryClient}>
           <SessionProvider>
             <ApplicationRepositoryProvider>
