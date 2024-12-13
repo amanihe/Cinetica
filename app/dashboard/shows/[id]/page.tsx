@@ -12,12 +12,13 @@ export default function ShowDetailsPage() {
   const { id } = useParams();
   const actorScrollRef = useRef<HTMLDivElement>(null);
   const imageScrollRef = useRef<HTMLDivElement>(null);
+  const validId = Array.isArray(id) ? id[0] : id || "";
+
+  const { data, isLoading, isError } = useFetchShowDetails(validId);
 
   if (!id || Array.isArray(id)) {
     return <div>Error: Invalid show ID</div>;
   }
-
-  const { data, isLoading, isError } = useFetchShowDetails(id);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error fetching show details</div>;
@@ -25,7 +26,9 @@ export default function ShowDetailsPage() {
   const director = data.credits?.crew.find(
     (member: CrewMember) => member.job === "Director"
   )?.name;
-
+  const composer = data.credits?.crew.find(
+    (member: CrewMember) => member.job === "Original Music Composer"
+  )?.name;
   const actors = data.credits?.cast.slice(0, 15);
   const images = data.images?.backdrops.slice(0, 6);
 
@@ -69,6 +72,8 @@ export default function ShowDetailsPage() {
           <p className="text-gray-700">{data.overview}</p>
           <h2 className="text-xl font-semibold mt-6 mb-2">Credits</h2>
           <p>Director: <span className="font-medium">{director || "Unknown"}</span></p>
+          <p>Composer: <span className="font-medium">{composer || "Unknown"}</span></p>
+
         </div>
       </div>
 

@@ -12,12 +12,13 @@ export default function MovieDetailsPage() {
   const { id } = useParams();
   const actorScrollRef = useRef<HTMLDivElement>(null);
   const imageScrollRef = useRef<HTMLDivElement>(null);
+  const validId = Array.isArray(id) ? id[0] : id || "";
+
+  const { data, isLoading, isError } = useFetchMovieDetails(validId);
 
   if (!id || Array.isArray(id)) {
     return <div>Error: Invalid movie ID</div>;
   }
-
-  const { data, isLoading, isError } = useFetchMovieDetails(id);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error fetching movie details</div>;

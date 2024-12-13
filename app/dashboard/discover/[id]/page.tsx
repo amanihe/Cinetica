@@ -13,14 +13,16 @@ export default function DiscoverDetailsPage() {
   const searchParams = useSearchParams();
   const type = searchParams.get("type");
 
+  const validId = Array.isArray(id) ? id[0] : id || "";
+
   const actorScrollRef = useRef<HTMLDivElement>(null);
   const imageScrollRef = useRef<HTMLDivElement>(null);
 
-  if (!id || Array.isArray(id) || !type) {
+  const { data, isLoading, isError } = useFetchDiscoverDetails(validId, type || "");
+
+  if (!validId || !type) {
     return <div>Error: Invalid ID or Type</div>;
   }
-
-  const { data, isLoading, isError } = useFetchDiscoverDetails(id, type);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError || !data) return <div>Error fetching details</div>;
