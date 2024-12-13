@@ -1,21 +1,21 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
   const { data: session, status } = useSession();
+  const router = useRouter();
 
-  if (status === "loading") {
-    return <div>En cours de développement...</div>;
-  }
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace("/dashboard/discover"); 
+    }
+  }, [status, router]);
 
-  if (!session) {
-    return <div>You must be logged in to access this page.</div>;
-  }
+ 
+  return null;
 
-  return (
-    <div>
-      <h1>Welcome {session.user?.email || "User"}!</h1>
-    </div>
-  );
+ 
 }
