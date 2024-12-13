@@ -3,20 +3,21 @@
 import { useParams, useSearchParams } from "next/navigation";
 import { useFetchDiscoverDetails } from "../use-cases/useFetchDiscoverDetails";
 import { useRef } from "react";
+import Image from "next/image";
 
 type CrewMember = { id: number; name: string; job: string };
 type CastMember = { id: number; name: string; character: string; profile_path?: string };
-type Image = { file_path: string };
+type ImageType = { file_path: string };
 
 export default function DiscoverDetailsPage() {
   const { id } = useParams();
   const searchParams = useSearchParams();
   const type = searchParams.get("type");
 
-  const validId = Array.isArray(id) ? id[0] : id || "";
-
   const actorScrollRef = useRef<HTMLDivElement>(null);
   const imageScrollRef = useRef<HTMLDivElement>(null);
+
+  const validId = Array.isArray(id) ? id[0] : id || "";
 
   const { data, isLoading, isError } = useFetchDiscoverDetails(validId, type || "");
 
@@ -53,10 +54,12 @@ export default function DiscoverDetailsPage() {
   return (
     <div className="p-4 bg-gray-100 min-h-screen w-full">
       <div className="flex flex-col lg:flex-row gap-6 bg-white p-4 rounded shadow-md">
-        <img
+        <Image
           src={`https://image.tmdb.org/t/p/w500${data.poster_path || data.backdrop_path}`}
           alt={data.title || data.name}
-          className="w-full lg:w-1/3 rounded shadow-md object-cover"
+          width={500}
+          height={750}
+          className="rounded shadow-md object-cover"
         />
         <div className="flex-1">
           <h1 className="text-3xl font-bold mb-2">
@@ -72,7 +75,7 @@ export default function DiscoverDetailsPage() {
             <span className="bg-green-500 text-white font-bold px-4 py-1 rounded-full">
               {Math.round(data.vote_average * 10)}%
             </span>
-            <span className="text-gray-500">Score d'évaluation</span>
+            <span className="text-gray-500">Score d&apos;évaluation</span>
           </div>
           <h2 className="text-xl font-semibold mt-6 mb-2">Synopsis</h2>
           <p className="text-gray-700">{data.overview}</p>
@@ -93,14 +96,16 @@ export default function DiscoverDetailsPage() {
         <div ref={actorScrollRef} className="flex overflow-x-auto no-scrollbar gap-4">
           {actors.map((actor: CastMember) => (
             <div key={actor.id} className="flex-shrink-0 w-[120px] text-center">
-              <img
+              <Image
                 src={
                   actor.profile_path
                     ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
                     : "https://via.placeholder.com/120x180?text=No+Image"
                 }
                 alt={actor.name}
-                className="w-24 h-36 rounded-md shadow-md mb-2 object-cover"
+                width={120}
+                height={180}
+                className="rounded-md shadow-md object-cover"
               />
               <h3 className="text-sm font-medium">{actor.name}</h3>
               <p className="text-xs text-gray-500">{actor.character}</p>
@@ -124,12 +129,14 @@ export default function DiscoverDetailsPage() {
           ◀
         </button>
         <div ref={imageScrollRef} className="flex overflow-x-auto no-scrollbar gap-4">
-          {images.map((image: Image, index: number) => (
-            <img
+          {images.map((image: ImageType, index: number) => (
+            <Image
               key={index}
               src={`https://image.tmdb.org/t/p/w500${image.file_path}`}
               alt="Scene"
-              className="rounded-md shadow-md w-[300px] h-auto flex-shrink-0 object-cover"
+              width={300}
+              height={200}
+              className="rounded-md shadow-md object-cover"
             />
           ))}
         </div>
