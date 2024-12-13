@@ -68,7 +68,7 @@ export default function MovieDetailsPage() {
             <span className="bg-green-500 text-white font-bold px-4 py-1 rounded-full">
               {Math.round(data.vote_average * 10)}%
             </span>
-            <span className="text-gray-500">Score d'évaluation</span>
+            <span className="text-gray-500">Score d&apos;évaluation</span>
           </div>
           <h2 className="text-xl font-semibold mt-6 mb-2">Synopsis</h2>
           <p className="text-gray-700">{data.overview}</p>
