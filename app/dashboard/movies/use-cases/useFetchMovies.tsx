@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Movie } from "@/app/entities/Movie";
-import { useApplicationRepositoryContext } from "@/app/repository/interfaces/ApplicationRepositoryContext";
+import { useApplicationRepositoryContext } from "@/app/repository/ApplicationRepositoryContext";
 
 
 export const useFetchNowPlayingMovies = () => {

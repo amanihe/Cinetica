@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { TVShow } from "@/app/entities/TVShow";
-import { useApplicationRepositoryContext } from "@/app/repository/interfaces/ApplicationRepositoryContext";
+import { useApplicationRepositoryContext } from "@/app/repository/ApplicationRepositoryContext";
 
 
 

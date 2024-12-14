@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { useState } from "react";
-import { ApplicationRepositoryProvider } from "./repository/interfaces/ApplicationRepositoryContext";
+import { ApplicationRepositoryProvider } from "./repository/ApplicationRepositoryContext";
 
 export default function RootLayout({
   children,

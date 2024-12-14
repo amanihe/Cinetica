@@ -1,7 +1,7 @@
 import { createContext, PropsWithChildren, useContext } from "react";
 import { MovieRepositoryImpl } from "@/app/repository/MovieRepositoryImpl";
-import { ShowsRepositoryImpl } from "../ShowsRepositoryImpl";
-import { DiscoverRepositoryImpl } from "../DiscoverRepositoryImpl";
+import { DiscoverRepositoryImpl } from "./DiscoverRepositoryImpl";
+import { ShowsRepositoryImpl } from "./ShowsRepositoryImpl";
 
 interface ApplicationRepository {
     movieRepository: MovieRepositoryImpl;
