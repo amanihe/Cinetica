@@ -22,11 +22,11 @@ export default function DiscoverDetailsPage() {
   const { data, isLoading, isError } = useFetchDiscoverDetails(validId, type || "");
 
   if (!validId || !type) {
-    return <div>Error: Invalid ID or Type</div>;
+    return <div className="dark:text-white">Error: Invalid ID or Type</div>;
   }
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError || !data) return <div>Error fetching details</div>;
+  if (isLoading) return <div className="dark:text-white">Loading...</div>;
+  if (isError || !data) return <div className="dark:text-white">Error fetching details</div>;
 
   const director = data.credits?.crew.find(
     (member: CrewMember) => member.job === "Director"
@@ -52,43 +52,43 @@ export default function DiscoverDetailsPage() {
   };
 
   return (
-    <div className="p-4 bg-gray-100 min-h-screen w-full">
-      <div className="flex flex-col lg:flex-row gap-6 bg-white p-4 rounded shadow-md">
+    <div className="p-4 bg-gray-100 dark:bg-black dark:text-gray-100 min-h-screen w-full">
+      <div className="flex flex-col lg:flex-row gap-6 bg-white dark:bg-gray-900 p-4 rounded shadow-md">
         <Image
           src={`https://image.tmdb.org/t/p/w500${data.poster_path || data.backdrop_path}`}
           alt={data.title || data.name}
-          width={500}
-          height={750}
+          width={400}
+          height={500}
           className="rounded shadow-md object-cover"
         />
         <div className="flex-1">
-          <h1 className="text-3xl font-bold mb-2">
+          <h1 className="text-3xl font-bold mb-2 dark:text-gray-100">
             {data.title || data.name}{" "}
-            <span className="text-gray-500 text-xl">
+            <span className="text-gray-500 dark:text-gray-400 text-xl">
               ({new Date(data.release_date || data.first_air_date).getFullYear()})
             </span>
           </h1>
-          <p className="text-gray-700 text-sm mb-4">
+          <p className="text-gray-700 dark:text-gray-400 text-sm mb-4">
             {data.genres?.map((g: { name: string }) => g.name).join(", ")}
           </p>
           <div className="flex items-center gap-4">
             <span className="bg-green-500 text-white font-bold px-4 py-1 rounded-full">
               {Math.round(data.vote_average * 10)}%
             </span>
-            <span className="text-gray-500">Score d&apos;évaluation</span>
+            <span className="text-gray-500 dark:text-gray-400">Review score</span>
           </div>
-          <h2 className="text-xl font-semibold mt-6 mb-2">Synopsis</h2>
-          <p className="text-gray-700">{data.overview}</p>
-          <h2 className="text-xl font-semibold mt-6 mb-2">Credits</h2>
-          <p>Director: <span className="font-medium">{director || "Unknown"}</span></p>
-          <p>Composer: <span className="font-medium">{composer || "Unknown"}</span></p>
+          <h2 className="text-xl font-semibold mt-6 mb-2 dark:text-gray-100">Synopsis</h2>
+          <p className="text-gray-700 dark:text-gray-400">{data.overview}</p>
+          <br/>
+          <p><b>Director: </b><span className="font-medium">{director || "Unknown"}</span></p>
+          <p><b>Composer: </b><span className="font-medium">{composer || "Unknown"}</span></p>
         </div>
       </div>
 
-      <h2 className="text-2xl font-semibold mt-10 mb-4">Distribution des rôles</h2>
-      <div className="relative bg-white rounded shadow-md p-4">
+      <h2 className="text-2xl font-semibold mt-10 mb-4 dark:text-gray-100">Credits</h2>
+      <div className="relative bg-white dark:bg-gray-900 rounded shadow-md p-4">
         <button
-          className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-300 rounded-full p-2 shadow-md z-10"
+          className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-300 dark:bg-gray-700 rounded-full p-2 shadow-md z-10"
           onClick={() => scrollLeft(actorScrollRef)}
         >
           ◀
@@ -107,23 +107,23 @@ export default function DiscoverDetailsPage() {
                 height={180}
                 className="rounded-md shadow-md object-cover"
               />
-              <h3 className="text-sm font-medium">{actor.name}</h3>
-              <p className="text-xs text-gray-500">{actor.character}</p>
+              <h3 className="text-sm font-medium dark:text-gray-100">{actor.name}</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{actor.character}</p>
             </div>
           ))}
         </div>
         <button
-          className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-300 rounded-full p-2 shadow-md z-10"
+          className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-300 dark:bg-gray-700 rounded-full p-2 shadow-md z-10"
           onClick={() => scrollRight(actorScrollRef)}
         >
           ▶
         </button>
       </div>
 
-      <h2 className="text-2xl font-semibold mt-10 mb-4">Images principales</h2>
-      <div className="relative bg-white rounded shadow-md p-4">
+      <h2 className="text-2xl font-semibold mt-10 mb-4 dark:text-gray-100">Images</h2>
+      <div className="relative bg-white dark:bg-gray-900 rounded shadow-md p-4">
         <button
-          className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-300 rounded-full p-2 shadow-md z-10"
+          className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-300 dark:bg-gray-700 rounded-full p-2 shadow-md z-10"
           onClick={() => scrollLeft(imageScrollRef)}
         >
           ◀
@@ -141,7 +141,7 @@ export default function DiscoverDetailsPage() {
           ))}
         </div>
         <button
-          className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-300 rounded-full p-2 shadow-md z-10"
+          className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-300 dark:bg-gray-700 rounded-full p-2 shadow-md z-10"
           onClick={() => scrollRight(imageScrollRef)}
         >
           ▶

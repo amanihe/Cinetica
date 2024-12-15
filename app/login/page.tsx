@@ -1,6 +1,6 @@
 "use client";
 
-import LoginPage from "./login";
+import LoginPage from "./components/login";
 
 export default function Login() {
   return <LoginPage errorMessage="" />;

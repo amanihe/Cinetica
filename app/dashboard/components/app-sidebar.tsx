@@ -50,24 +50,24 @@ const TvShowItems = [
 
 export function AppSidebar() {
   return (
-    <Sidebar>
-      <SidebarContent>
+    <Sidebar className="bg-white dark:text-white text-black">
+      <SidebarContent className="dark:bg-gray-900">
         <SidebarGroup>
           <div className="md:p-6"></div>
           <SidebarMenuButton asChild>
-                    <a href="/dashboard/discover">
-                    <Grid />
-                      <span>Discover</span>
-                    </a>
-                  </SidebarMenuButton>
-          <SidebarGroupLabel>Movies</SidebarGroupLabel>
+            <a href="/dashboard/discover">
+              <Grid className="dark:text-white" />
+              <span>Discover</span>
+            </a>
+          </SidebarMenuButton>
+          <SidebarGroupLabel className="text-gray-500 dark:text-gray-400">Movies</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {MoviesItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
-                      <item.icon />
+                      <item.icon className="dark:text-white" />
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
@@ -75,14 +75,14 @@ export function AppSidebar() {
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
-          <SidebarGroupLabel>TV Shows</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-gray-500 dark:text-gray-400">TV Shows</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {TvShowItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
-                      <item.icon />
+                      <item.icon className="dark:text-white" />
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
@@ -90,15 +90,15 @@ export function AppSidebar() {
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
-          
+
         </SidebarGroup>
       </SidebarContent>
-      <div className="mt-auto p-4 border-t">
+      <div className="mt-auto p-4 border-t dark:border-gray-700">
         <button
-          className="flex items-center gap-2 text-black hover:text-red-800"
+          className="flex items-center gap-2 text-black hover:text-red-800 dark:text-white dark:hover:text-red-400"
           onClick={() => signOut({ callbackUrl: "/" })}
         >
-          <LogOut />
+          <LogOut className="dark:text-white" />
           <span>Logout</span>
         </button>
       </div>
