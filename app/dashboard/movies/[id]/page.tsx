@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import { useFetchMovieDetails } from "../use-cases/useFetchMovieDetails";
 import { useRef } from "react";
+import { Movie } from "@/app/entities/Movie";
 
 type CrewMember = { id: number; name: string; job: string };
 type CastMember = { id: number; name: string; character: string; profile_path?: string };
@@ -13,8 +14,7 @@ export default function MovieDetailsPage() {
   const actorScrollRef = useRef<HTMLDivElement>(null);
   const imageScrollRef = useRef<HTMLDivElement>(null);
   const validId = Array.isArray(id) ? id[0] : id || "";
-
-  const { data, isLoading, isError } = useFetchMovieDetails(validId);
+  const { data = {} as Movie, isLoading, isError } = useFetchMovieDetails(validId);
 
   if (!id || Array.isArray(id)) {
     return <div>Error: Invalid movie ID</div>;

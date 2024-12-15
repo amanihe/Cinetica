@@ -4,4 +4,6 @@ export interface ShowsRepository {
   geOnTheAirShows(): Promise<TVShow[]>;
   getPopularShows(): Promise<TVShow[]>;
   getTopRatedShows(): Promise<TVShow[]>;
+  getShowDetails(id: string): Promise<TVShow>;
+
 }

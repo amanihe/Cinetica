@@ -1,15 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
+import { TVShow } from "@/app/entities/TVShow";
+import { useApplicationRepositoryContext } from "@/app/repository/ApplicationRepositoryContext";
 
 export const useFetchShowDetails = (id: string) => {
-    return useQuery({
-        queryKey: ["show-details", id],
-        queryFn: async () => {
-            const res = await fetch(`/api/shows/${id}`);
-            if (!res.ok) {
-                throw new Error("Failed to fetch show details");
-            }
-            return res.json();
-        },
-        enabled: !!id, 
-    });
+  const { tvShowsRepository } = useApplicationRepositoryContext();
+
+  return useQuery<TVShow>({
+    queryKey: ["show-details", id],
+    queryFn: async () => await tvShowsRepository.getShowDetails(id),
+    enabled: !!id,
+  });
 };

@@ -1,15 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
+import { Movie } from "@/app/entities/Movie";
+import { useApplicationRepositoryContext } from "@/app/repository/ApplicationRepositoryContext";
 
 export const useFetchMovieDetails = (id: string) => {
-    return useQuery({
-        queryKey: ["movie-details", id],
-        queryFn: async () => {
-            const res = await fetch(`/api/movies/${id}`);
-            if (!res.ok) {
-                throw new Error("Failed to fetch movie details");
-            }
-            return res.json();
-        },
-        enabled: !!id, 
-    });
+  const { movieRepository } = useApplicationRepositoryContext();
+
+  return useQuery<Movie>({
+    queryKey: ["movie-details", id],
+    queryFn: async () => await movieRepository.getMovieDetails(id),
+    enabled: !!id,
+  });
 };

@@ -1,15 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
+import { Movie } from "@/app/entities/Movie";
+import { TVShow } from "@/app/entities/TVShow";
+import { useApplicationRepositoryContext } from "@/app/repository/ApplicationRepositoryContext";
 
 export const useFetchDiscoverDetails = (id: string, type: string) => {
-  return useQuery({
+  const { discoverRepository } = useApplicationRepositoryContext();
+
+  return useQuery<Movie | TVShow>({
     queryKey: ["discover-details", id, type],
-    queryFn: async () => {
-      const res = await fetch(`/api/discover/${id}?type=${type}`);
-      if (!res.ok) {
-        throw new Error("Failed to fetch discover details");
-      }
-      return res.json();
-    },
-    enabled: !!id && !!type, 
+    queryFn: async () => await discoverRepository.getDiscoverDetails(id, type),
+    enabled: !!id && !!type,
   });
 };

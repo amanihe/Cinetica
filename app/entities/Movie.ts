@@ -15,11 +15,12 @@ export interface Movie {
   vote_count: number;
 
   credits?: {
-      cast: { id: number; name: string; character: string }[]; 
+      cast: { id: number; name: string; character: string;profile_path?: string }[]; 
       crew: { id: number; name: string; job: string }[];      
   };
   images?: {
       backdrops: { file_path: string }[];  
       posters: { file_path: string }[];   
   };
+  genres?: { id: number; name: string }[];
 }

@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import { useFetchShowDetails } from "../use-cases/useFetchShowDetails";
 import { useRef } from "react";
+import { TVShow } from "@/app/entities/TVShow";
 
 type CrewMember = { id: number; name: string; job: string };
 type CastMember = { id: number; name: string; character: string; profile_path?: string };
@@ -13,8 +14,7 @@ export default function ShowDetailsPage() {
   const actorScrollRef = useRef<HTMLDivElement>(null);
   const imageScrollRef = useRef<HTMLDivElement>(null);
   const validId = Array.isArray(id) ? id[0] : id || "";
-
-  const { data, isLoading, isError } = useFetchShowDetails(validId);
+  const { data = {} as TVShow, isLoading, isError } = useFetchShowDetails(validId);
 
   if (!id || Array.isArray(id)) {
     return <div>Error: Invalid show ID</div>;
