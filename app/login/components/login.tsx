@@ -63,6 +63,7 @@ const LoginPage: FC<LoginPageProps> = ({ errorMessage }) => {
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div>
@@ -73,6 +74,7 @@ const LoginPage: FC<LoginPageProps> = ({ errorMessage }) => {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
             <button

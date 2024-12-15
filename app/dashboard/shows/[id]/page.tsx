@@ -114,7 +114,7 @@ export default function ShowDetailsPage() {
     </button>
   </div>
 
-  <h2 className="text-2xl font-semibold mt-10 mb-4 dark:text-gray-100">Images principales</h2>
+  <h2 className="text-2xl font-semibold mt-10 mb-4 dark:text-gray-100">Images</h2>
   <div className="relative bg-white dark:bg-gray-800 rounded shadow-md p-4">
     <button
       className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-300 dark:bg-gray-700 rounded-full p-2 shadow-md z-10"
