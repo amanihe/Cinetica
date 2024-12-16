@@ -6,10 +6,7 @@ import { useFetchOnTheAirShows } from "@/app/dashboard/shows/use-cases/useFetchS
 import { useFetchSearchShows } from "../use-cases/useFetchSearchShows";
 import { useSearchParams } from "next/navigation";
 
-function OnTheAirShowsContent() {
-  const searchParams = useSearchParams();
-  const query = searchParams.get("query") || "";
-
+function OnTheAirShowsContent({ query }: { query: string }) {
   const { data: onTheAirShows = [], isLoading, isError } = useFetchOnTheAirShows();
   const { data: searchedShows = [], isLoading: isSearching } = useFetchSearchShows(query);
 
@@ -45,9 +42,12 @@ function OnTheAirShowsContent() {
 }
 
 export default function OnTheAirShows() {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query") || "";
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <OnTheAirShowsContent />
+      <OnTheAirShowsContent query={query} />
     </Suspense>
   );
 }
