@@ -8,7 +8,6 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Query parameter is required" }, { status: 400 });
   }
 
-  try {
     const [moviesResponse, showsResponse] = await Promise.all([
       fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_API_KEY}&query=${query}`),
       fetch(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.TMDB_API_KEY}&query=${query}`),
@@ -24,7 +23,5 @@ export async function GET(req: Request) {
       movies: movies.results || [],
       tvShows: shows.results || [],
     });
-  } catch (error) {
-    return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 });
-  }
+  
 }
