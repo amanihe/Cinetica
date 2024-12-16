@@ -1,11 +1,12 @@
 "use client";
+
+import { Suspense, useRef } from "react";
 import { useFetchDiscover } from "@/app/dashboard/discover/use-cases/useFetchDiscover";
 import { useFetchSearchDiscover } from "@/app/dashboard/discover/use-cases/useFetchSearchDiscover";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { useRef } from "react";
 
-export default function DiscoverPage() {
+function DiscoverContent() {
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || "";
 
@@ -120,5 +121,13 @@ export default function DiscoverPage() {
         </>
       )}
     </div>
+  );
+}
+
+export default function DiscoverPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DiscoverContent />
+    </Suspense>
   );
 }

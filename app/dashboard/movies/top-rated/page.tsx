@@ -4,18 +4,18 @@ import Link from "next/link";
 import { useFetchTopRatedMovies } from "../use-cases/useFetchMovies";
 import { useFetchSearchMovies } from "../use-cases/useFetchSearchMovies";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-export default function TopRatedMovies() {
+function TopRatedMoviesContent() {
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || "";
-  
+
   const { data: topRatedMovies = [], isLoading, isError } = useFetchTopRatedMovies();
   const { data: searchedMovies = [], isLoading: isSearching } = useFetchSearchMovies(query);
-  
-  const movies = query.trim() ? searchedMovies : topRatedMovies;
-  
 
- if (isLoading||isSearching) return <div>Loading...</div>;
+  const movies = query.trim() ? searchedMovies : topRatedMovies;
+
+  if (isLoading || isSearching) return <div>Loading...</div>;
   if (isError) return <div>Error fetching movies</div>;
 
   return (
@@ -23,21 +23,31 @@ export default function TopRatedMovies() {
       <h2 className="text-2xl font-semibold mb-4">Top Rated Movies</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {movies.map((movie) => (
-        <Link href={`/dashboard/movies/${movie.id}`} key={movie.id}>
-          <div key={movie.id} className="border rounded shadow p-2">
-            <img
-              src={movie.poster_path
-                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                : "https://via.placeholder.com/150x225?text=No+Image"}
-              alt={movie.title}
-              className="w-full h-auto rounded"
-            />
-            <h3 className="text-sm font-medium mt-2">{movie.title}</h3>
-            <p className="text-xs text-gray-500">{movie.release_date}</p>
-          </div>
-        </Link>
+          <Link href={`/dashboard/movies/${movie.id}`} key={movie.id}>
+            <div className="border rounded shadow p-2">
+              <img
+                src={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                    : "https://via.placeholder.com/150x225?text=No+Image"
+                }
+                alt={movie.title}
+                className="w-full h-[320px] object-cover rounded"
+              />
+              <h3 className="text-sm font-medium mt-2">{movie.title}</h3>
+              <p className="text-xs text-gray-500">{movie.release_date}</p>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
+  );
+}
+
+export default function TopRatedMovies() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TopRatedMoviesContent />
+    </Suspense>
   );
 }
