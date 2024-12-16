@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { Suspense } from "react";
 import { useFetchNowPlayingMovies } from "../use-cases/useFetchMovies";
 import { useFetchSearchMovies } from "../use-cases/useFetchSearchMovies";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
 
 function NowPlayingMoviesContent() {
   const searchParams = useSearchParams();
@@ -46,7 +46,7 @@ function NowPlayingMoviesContent() {
 
 export default function NowPlayingMovies() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>Loading search parameters...</div>}>
       <NowPlayingMoviesContent />
     </Suspense>
   );
