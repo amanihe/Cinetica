@@ -18,4 +18,7 @@ export class ShowsRepositoryImpl implements ShowsRepository {
   async getShowDetails(id: string): Promise<TVShow> {
     return apiFetch<TVShow>(`/api/shows/${id}`);
   }
+  async searchShows(query: string): Promise<TVShow[]> {
+    return apiFetch<TVShow[]>(`/api/shows/search?query=${query}`);
+  }  
 }

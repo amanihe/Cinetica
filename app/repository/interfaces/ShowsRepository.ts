@@ -5,5 +5,7 @@ export interface ShowsRepository {
   getPopularShows(): Promise<TVShow[]>;
   getTopRatedShows(): Promise<TVShow[]>;
   getShowDetails(id: string): Promise<TVShow>;
+  searchShows(query: string): Promise<TVShow[]>;
+
 
 }

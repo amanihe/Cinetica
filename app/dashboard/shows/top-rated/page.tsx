@@ -2,22 +2,33 @@
 
 import { useFetchTopRatedShows } from "@/app/dashboard/shows/use-cases/useFetchShows";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useFetchSearchShows } from "../use-cases/useFetchSearchShows";
 
 export default function TopRatedShows() {
-  const { data = [], isLoading, isError } = useFetchTopRatedShows();
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query") || "";
+  
+  const { data: topRatedShows = [], isLoading, isError } = useFetchTopRatedShows();
+  const { data: searchedMovies = [], isLoading: isSearching } = useFetchSearchShows(query);
+  
+  const shows = query.trim() ? searchedMovies : topRatedShows;
+  
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading||isSearching) return <div>Loading...</div>;
    if (isError) return <div>Error fetching movies</div>;
  
   return (
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">Top Rated TV Shows</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {data.map((show) => (
+        {shows.map((show) => (
         <Link href={`/dashboard/shows/${show.id}`} key={show.id}>
           <div key={show.id} className="border rounded shadow p-2">
             <img
-              src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
+              src={show.poster_path
+                ? `https://image.tmdb.org/t/p/w500${show.poster_path}`
+                : "https://via.placeholder.com/150x225?text=No+Image"}
               alt={show.name}
               className="w-full h-auto rounded"
             />

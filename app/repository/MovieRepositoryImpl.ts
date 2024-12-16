@@ -17,4 +17,7 @@ export class MovieRepositoryImpl implements MoviesRepository {
   async getMovieDetails(id: string): Promise<Movie> {
     return apiFetch<Movie>(`/api/movies/${id}`);
   }
+  async searchMovies(query: string): Promise<Movie[]> {
+    return apiFetch<Movie[]>(`/api/movies/search?query=${query}`);
+  }  
 }

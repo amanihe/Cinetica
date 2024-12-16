@@ -41,7 +41,9 @@ export const config = {
     "/api/discover/[id]",
     "/api/movies/:path*",
     "/api/movies/[id]",
+    "/api/movies/search",
     "/api/shows/:path*",
     "/api/shows/[id]",
+    "/api/shows/search",
   ],
 };

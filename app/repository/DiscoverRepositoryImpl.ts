@@ -16,4 +16,7 @@ export class DiscoverRepositoryImpl {
         }
         throw new Error("Invalid type");
       }
+      async searchDiscover(query: string): Promise<Discover> {
+        return apiFetch<Discover>(`/api/discover/search?query=${query}`);
+      }
 }

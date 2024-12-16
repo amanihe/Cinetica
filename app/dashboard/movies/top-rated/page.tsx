@@ -2,22 +2,33 @@
 
 import Link from "next/link";
 import { useFetchTopRatedMovies } from "../use-cases/useFetchMovies";
+import { useFetchSearchMovies } from "../use-cases/useFetchSearchMovies";
+import { useSearchParams } from "next/navigation";
 
 export default function TopRatedMovies() {
-  const { data = [], isLoading, isError } = useFetchTopRatedMovies();
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query") || "";
+  
+  const { data: topRatedMovies = [], isLoading, isError } = useFetchTopRatedMovies();
+  const { data: searchedMovies = [], isLoading: isSearching } = useFetchSearchMovies(query);
+  
+  const movies = query.trim() ? searchedMovies : topRatedMovies;
+  
 
- if (isLoading) return <div>Loading...</div>;
+ if (isLoading||isSearching) return <div>Loading...</div>;
   if (isError) return <div>Error fetching movies</div>;
 
   return (
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">Top Rated Movies</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {data.map((movie) => (
+        {movies.map((movie) => (
         <Link href={`/dashboard/movies/${movie.id}`} key={movie.id}>
           <div key={movie.id} className="border rounded shadow p-2">
             <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              src={movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : "https://via.placeholder.com/150x225?text=No+Image"}
               alt={movie.title}
               className="w-full h-auto rounded"
             />
